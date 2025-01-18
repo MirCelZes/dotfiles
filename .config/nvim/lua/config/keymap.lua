@@ -13,32 +13,39 @@ vim.g.localleader = "\\"
 -- s - substitute
 local mappings = {
 	-- window
-	{ "n", "<leader>h", ":leftabove vsplit | wincmd h<CR>", { desc = "Split a window to left" } },
-	{ "n", "<leader>j", ":botright split | wincmd j<CR>", { desc = "Split a window to bottom" } },
-	{ "n", "<leader>k", ":topleft split | wincmd k<CR>", { desc = "Split a window to above" } },
-	{ "n", "<leader>l", ":rightbelow vsplit | wincmd l<CR>", { desc = "Split a window to right" } },
+	{ "n", "<leader>h", ":leftabove vsplit | wincmd h<cr>", { desc = "Split a window to left" } },
+	{ "n", "<leader>j", ":botright split | wincmd j<cr>", { desc = "Split a window to bottom" } },
+	{ "n", "<leader>k", ":topleft split | wincmd k<cr>", { desc = "Split a window to above" } },
+	{ "n", "<leader>l", ":rightbelow vsplit | wincmd l<cr>", { desc = "Split a window to right" } },
 
-	{ { "n", "i", "v" }, "<M-w>h", ":wincmd h<CR>", { desc = "Go to left window" } }, 
-	{ { "n", "i", "v" }, "<M-w>j", ":wincmd j<CR>", { desc = "Go to below window" } }, 
-	{ { "n", "i", "v" }, "<M-w>k", ":wincmd k<CR>", { desc = "Go to above window" } },
-	{ { "n", "i", "v" }, "<M-w>l", ":wincmd l<CR>", { desc = "Go to right window" } },
+	{ { "n", "i", "v" }, "<M-w>h", ":wincmd h<cr>", { desc = "Go to left window" } }, 
+	{ { "n", "i", "v" }, "<M-w>j", ":wincmd j<cr>", { desc = "Go to below window" } }, 
+	{ { "n", "i", "v" }, "<M-w>k", ":wincmd k<cr>", { desc = "Go to above window" } },
+	{ { "n", "i", "v" }, "<M-w>l", ":wincmd l<cr>", { desc = "Go to right window" } },
 
-	{ { "n", "i", "v" }, "<S-W>h", ":vertical resize +1<CR>", { desc = "Increase window height" } },
-	{ { "n", "i", "v" }, "<S-W>j", ":resize -1<CR>", { desc = "Increase window size" } },
-	{ { "n", "i", "v" }, "<S-W>k", ":resize +1<CR>", { desc = "Increase window size" } },
-	{ { "n", "i", "v" }, "<S-W>l", ":vertical resize -1<CR>", { desc = "Decrease window weight" } },
+	{ { "n", "i", "v" }, "<S-W>h", ":vertical resize +1<cr>", { desc = "Increase window height" } },
+	{ { "n", "i", "v" }, "<S-W>j", ":resize -1<cr>", { desc = "Increase window size" } },
+	{ { "n", "i", "v" }, "<S-W>k", ":resize +1<cr>", { desc = "Increase window size" } },
+	{ { "n", "i", "v" }, "<S-W>l", ":vertical resize -1<cr>", { desc = "Decrease window weight" } },
 	
-	{ { "n", "i" }, "<M-j>", "<ESC>:move .+1<CR>==", { desc = "Move current line down" } },
-	{ { "n", "i" }, "<M-k>", "<ESC>:move .-2<CR>==", { desc = "Move current line up" } },
-	{ "v", "<M-j>", ":'<,'>move '>+<CR>gv=gv", { desc = "Move selected lines up" } },
-	{ "v", "<M-k>", ":'<,'>move '<-2<CR>gv=gv", { desc = "Move selected lines down" } },
+	{ { "n", "i" }, "<M-j>", "<esc>:move .+1<cr>==", { desc = "Move current line down" } },
+	{ { "n", "i" }, "<M-k>", "<esc>:move .-2<cr>==", { desc = "Move current line up" } },
+	{ "v", "<M-j>", ":'<,'>move '>+<cr>gv=gv", { desc = "Move selected lines up" } },
+	{ "v", "<M-k>", ":'<,'>move '<-2<cr>gv=gv", { desc = "Move selected lines down" } },
 
-	{ { "n", "i", "v" }, "<M-[>", ":bprevious<CR>", { desc = "Go to previous buffer" } },
-	{ { "n", "i", "v" }, "<M-]>", ":bnext<CR>", { desc = "Go to next buffer" } },
+	{ { "n", "i", "v" }, "<M-[>", ":bprevious<cr>", { desc = "Go to previous buffer" } },
+	{ { "n", "i", "v" }, "<M-]>", ":bnext<cr>", { desc = "Go to next buffer" } },
 
-	-- clear highlights on search when pressing <ESC>
-	{ "n", "<ESC>", ":nohlsearch<CR>", { noremap = false } }
 	-- tab
+	{ "n", "<leader><tab>n", ":tabnew<cr>", { desc = "Create new tab" } },
+	{ "n", "<leader><tab>o", ":tabonly<cr>", { desc = "Close other tab" } },
+	{ "n", "<leader><tab>d", ":tabclose<cr>", { desc = "Close current tab" } },
+	{ "n", "<tab>[", ":tabprevious<cr>", { desc = "Go to previous tab" } },
+	{ "n", "<tab>]", ":tabnext<cr>", { desc = "Go to next tab" } },
+
+	-- clear highlights on search when pressing <esc>
+	{ "n", "<esc>", ":nohlsearch<cr>", { noremap = false } }
+	
 }
 
 -- default opts:
