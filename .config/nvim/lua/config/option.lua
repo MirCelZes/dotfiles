@@ -1,8 +1,4 @@
--- :help leader
-vim.g.mapleader = " "
-vim.g.localleader = "\\"
 vim.g.have_nerd_font = true
-
 
 -- :help xxx (where xxx should be within "vim.opt.xxx")
 -- :help vim.opt
@@ -46,7 +42,7 @@ opt.splitkeep = "screen"
 -- :help listchars
 -- set how neovim display some whitespace characters in editor
 opt.list = true
-opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+opt.listchars = { tab = '··', trail = '↵', nbsp = '␣' }
 
 -- preview when using :%s
 opt.inccommand = "nosplit"
