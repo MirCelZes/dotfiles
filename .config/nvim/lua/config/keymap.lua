@@ -33,8 +33,8 @@ local mappings = {
 	{ "v", "<M-j>", ":'<,'>move '>+<cr>gv=gv", { desc = "Move selected lines up" } },
 	{ "v", "<M-k>", ":'<,'>move '<-2<cr>gv=gv", { desc = "Move selected lines down" } },
 
-	{ { "n", "i", "v" }, "<M-[>", ":bprevious<cr>", { desc = "Go to previous buffer" } },
-	{ { "n", "i", "v" }, "<M-]>", ":bnext<cr>", { desc = "Go to next buffer" } },
+	{ { "n", "i", "v" }, "<M-{>", ":bprevious<cr>", { desc = "Go to previous buffer" } },
+	{ { "n", "i", "v" }, "<M-}>", ":bnext<cr>", { desc = "Go to next buffer" } },
 
 	-- tab
 	{ "n", "<leader><tab>n", ":tabnew<cr>", { desc = "Create new tab" } },
@@ -43,9 +43,20 @@ local mappings = {
 	{ "n", "<tab>[", ":tabprevious<cr>", { desc = "Go to previous tab" } },
 	{ "n", "<tab>]", ":tabnext<cr>", { desc = "Go to next tab" } },
 
+  -- diagnose
+  { { "n", "i", "v" }, "<M-[>", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" } },
+  { { "n", "i", "v" }, "<M-]>", vim.diagnostic.goto_prev, { desc = "Go to next diagnostic message" } },
+
 	-- clear highlights on search when pressing <esc>
-	{ "n", "<esc>", ":nohlsearch<cr>", { noremap = false } }
-	
+	{ "n", "<esc>", ":nohlsearch<cr>", { noremap = false } },
+
+  -- auto scroll and unfold the line when finding
+  { { "n", "v" }, "n", "nzzzv" },
+  { { "n", "v" }, "N", "Nzzzv" },
+
+  -- sweeter indent
+  { "v", "<", "<gv" },
+  { "v", ">", ">gv" },
 }
 
 -- default opts:
