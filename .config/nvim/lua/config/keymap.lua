@@ -18,8 +18,8 @@ local mappings = {
 	{ "n", "<leader>k", ":topleft split | wincmd k<cr>", { desc = "Split a window to above" } },
 	{ "n", "<leader>l", ":rightbelow vsplit | wincmd l<cr>", { desc = "Split a window to right" } },
 
-	{ { "n", "i", "v" }, "<M-w>h", ":wincmd h<cr>", { desc = "Go to left window" } }, 
-	{ { "n", "i", "v" }, "<M-w>j", ":wincmd j<cr>", { desc = "Go to below window" } }, 
+	{ { "n", "i", "v" }, "<M-w>h", ":wincmd h<cr>", { desc = "Go to left window" } },
+	{ { "n", "i", "v" }, "<M-w>j", ":wincmd j<cr>", { desc = "Go to below window" } },
 	{ { "n", "i", "v" }, "<M-w>k", ":wincmd k<cr>", { desc = "Go to above window" } },
 	{ { "n", "i", "v" }, "<M-w>l", ":wincmd l<cr>", { desc = "Go to right window" } },
 

@@ -20,7 +20,9 @@ require("lazy").setup({
   spec = {
     -- import plugins
     { import = "plugin" },
+    { import = "plugin/lsp" },
   },
+
   -- automatically check for plugin updates
   checker = { enabled = true },
 })

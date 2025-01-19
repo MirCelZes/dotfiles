@@ -21,6 +21,9 @@ opt.breakindent = true
 opt.shiftround = true
 opt.shiftwidth = 2
 
+-- use spaces when tab
+opt.expandtab = true
+
 -- tab size
 opt.tabstop = 2
 
@@ -41,8 +44,8 @@ opt.splitkeep = "screen"
 -- :help list
 -- :help listchars
 -- set how neovim display some whitespace characters in editor
-opt.list = true
-opt.listchars = { tab = '··', trail = '↵', nbsp = '␣' }
+-- opt.list = true
+-- opt.listchars = { tab = ' ·', trail = '↵', nbsp = '␣' }
 
 -- preview when using :%s
 opt.inccommand = "nosplit"
@@ -76,3 +79,5 @@ opt.ruler = false
 opt.undofile = true
 opt.undolevels = 10000
 
+-- true color support
+opt.termguicolors = true
