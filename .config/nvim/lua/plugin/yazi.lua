@@ -1,19 +1,8 @@
 return {
   "mikavilpas/yazi.nvim",
-  event = "VeryLazy",
   keys = {
     {
-      "<leader>t",
-      mode = { "n", "v" },
-      "<cmd>Yazi<cr>",
-      desc = "Open yazi at the current file",
-    },
-    {
-      -- NOTE: this requires a version of yazi that includes
-      -- https://github.com/sxyazi/yazi/pull/1305 from 2024-07-18
-      '<leader>tl',
-      "<cmd>Yazi toggle<cr>",
-      desc = "Resume the last yazi session",
+      "<leader>ft", "<cmd>Yazi<cr>", mode = { "n", "v" }, desc = "Open yazi at the current file",
     },
   },
   opts = {

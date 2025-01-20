@@ -1,52 +1,92 @@
 return {
-  "hrsh7th/nvim-cmp",
-  dependencies = {
-    "neovim/nvim-lspconfig",
-    "hrsh7th/cmp-nvim-lsp",
-    "L3MON4D3/LuaSnip",
-  },
-  config = function()
-    local cmp = require("cmp")
-    local luasnip = require("luasnip")
-    cmp.setup({
-      sources = {
-        { name = "nvim_lsp" },
-      },
-      mapping = {
-        ['<CR>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            if luasnip.expandable() then
-              luasnip.expand()
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+    },
+    event = "InsertEnter",
+    config = function()
+      local lspconfig = require("lspconfig")
+
+      local luasnip = require('luasnip')
+
+      local cmp_nvim_lsp = require("cmp_nvim_lsp")
+      local cmp = require("cmp")
+
+      local lspconfig_defaults = lspconfig.util.default_config
+      lspconfig_defaults.capabilities = vim.tbl_deep_extend(
+        "force",
+        lspconfig_defaults.capabilities,
+        cmp_nvim_lsp.default_capabilities()
+      )
+
+      vim.api.nvim_create_autocmd("LspAttach", {
+        desc = "Triggerd when lsp attaches to buffer",
+        callback = function(event)
+          local shared_opts = { buffer = event.buf }
+
+          for _, entry in ipairs(LspKeyMappings()) do
+            local modes, lhs, rhs, entry_opts = unpack(entry)
+            opts = vim.tbl_deep_extend("force", shared_opts, entry_opts or { silent = true })
+            vim.keymap.set(modes, lhs, rhs, opts)
+          end
+        end,
+      })
+
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            require("luasnip").lsp_expand(args.body)
+          end,
+        },
+        sources = {
+          { name = "nvim_lsp" },
+          { name = "lua_snip" },
+          { name = "buffer" },
+        },
+        window = {
+          documentation = {
+            border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+          },
+          completion = {
+            border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+            winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None',
+          },
+        },
+        mapping = cmp.mapping.preset.insert({
+          ["<cr>"] = cmp.mapping.confirm({ select = true }),
+          -- Super tab
+          ["<tab>"] = cmp.mapping(function(fallback)
+            local col = vim.fn.col(".") - 1
+
+            if cmp.visible() then
+              cmp.select_next_item({ behavior = "select" })
+            elseif luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
+            elseif col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
+              fallback()
             else
-              cmp.confirm({
-                select = true,
-              })
+              cmp.complete()
             end
-          else
-            fallback()
-          end
-        end),
+          end, { "i", "s" }),
 
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.locally_jumpable(1) then
-            luasnip.jump(1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.locally_jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-      },
-    })
-  end,
+          -- Super shift tab
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item({ behavior = "select" })
+            elseif luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+        })
+      })
+    end,
+  },
 }

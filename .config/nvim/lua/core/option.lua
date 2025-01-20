@@ -81,3 +81,6 @@ opt.undolevels = 10000
 
 -- true color support
 opt.termguicolors = true
+
+-- waiting time of command
+opt.timeoutlen = 500

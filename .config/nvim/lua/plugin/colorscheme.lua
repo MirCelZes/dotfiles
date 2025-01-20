@@ -1,13 +1,7 @@
 return {
-	"rose-pine/neovim", 
+	"rose-pine/neovim",
 	name = "rose-pine",
-	priority = 1000,
-	init = function()
-		vim.cmd("colorscheme rose-pine")
-	end,
-  opts = {
-    styles = {
-      transparency = false,
-    },
-  },
+  init = function()
+    vim.cmd("colorscheme rose-pine")
+  end
 }

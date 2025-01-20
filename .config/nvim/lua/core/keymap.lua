@@ -1,0 +1,86 @@
+vim.g.mapleader = " "
+vim.g.localleader = "\\"
+
+-- default opts:
+-- nowait = true
+local shared_opts = { noremap = true, silent = true }
+
+-- :help vim.keymap.set
+-- vim.keymap.set({mode}, {lhs}, {rhs}, {opts})
+-- mode:
+-- n - normal
+-- i - insert
+-- v - visual
+-- c - command
+-- r - replace
+-- t - terminal
+-- s - substitute
+local mappings = {
+  -- window
+  { "n",               "<leader>wh",     ":leftabove vsplit | wincmd h<cr>",  { desc = "Split a window to left" } },
+  { "n",               "<leader>wj",     ":botright split | wincmd j<cr>",    { desc = "Split a window to bottom" } },
+  { "n",               "<leader>wk",     ":topleft split | wincmd k<cr>",     { desc = "Split a window to above" } },
+  { "n",               "<leader>wl",     ":rightbelow vsplit | wincmd l<cr>", { desc = "Split a window to right" } },
+
+  { { "n", "i", "v" }, "<M-w>h",         ":wincmd h<cr>",                     { desc = "Go to left window" } },
+  { { "n", "i", "v" }, "<M-w>j",         ":wincmd j<cr>",                     { desc = "Go to below window" } },
+  { { "n", "i", "v" }, "<M-w>k",         ":wincmd k<cr>",                     { desc = "Go to above window" } },
+  { { "n", "i", "v" }, "<M-w>l",         ":wincmd l<cr>",                     { desc = "Go to right window" } },
+
+  { { "n", "i", "v" }, "<S-w><Right>",   ":vertical resize +1<cr>",           { desc = "Increase window height" } },
+  { { "n", "i", "v" }, "<S-w><Down>",    ":resize -1<cr>",                    { desc = "Decrease window weight" } },
+  { { "n", "i", "v" }, "<S-w><Up>",      ":resize +1<cr>",                    { desc = "Increase window weight" } },
+  { { "n", "i", "v" }, "<S-w><Left>",    ":vertical resize -1<cr>",           { desc = "Decrease window weight" } },
+
+  { { "n", "i" },      "<M-j>",          "<esc>:move .+1<cr>==",              { desc = "Move current line down" } },
+  { { "n", "i" },      "<M-k>",          "<esc>:move .-2<cr>==",              { desc = "Move current line up" } },
+  { "v",               "<M-j>",          ":'<,'>move '>+<cr>gv=gv",           { desc = "Move selected lines up" } },
+  { "v",               "<M-k>",          ":'<,'>move '<-2<cr>gv=gv",          { desc = "Move selected lines down" } },
+
+  { { "n", "i", "v" }, "<M-w>[",         ":bprevious<cr>",                    { desc = "Go to previous buffer" } },
+  { { "n", "i", "v" }, "<M-w>]",         ":bnext<cr>",                        { desc = "Go to next buffer" } },
+
+  -- tab
+  { "n",               "<leader><tab>n", ":tabnew<cr>",                       { desc = "Create new tab" } },
+  { "n",               "<leader><tab>o", ":tabonly<cr>",                      { desc = "Close other tab" } },
+  { "n",               "<leader><tab>d", ":tabclose<cr>",                     { desc = "Close current tab" } },
+  { "n",               "<tab>[",         ":tabprevious<cr>",                  { desc = "Go to previous tab" } },
+  { "n",               "<tab>]",         ":tabnext<cr>",                      { desc = "Go to next tab" } },
+
+  -- diagnose
+  { { "n", "i", "v" }, "<M-[>",          vim.diagnostic.goto_prev,            { desc = "Go to previous diagnostic message" } },
+  { { "n", "i", "v" }, "<M-]>",          vim.diagnostic.goto_next,            { desc = "Go to next diagnostic message" } },
+
+  -- clear highlights on search when pressing <esc>
+  { "n",               "<esc>",          ":nohlsearch<cr>",                   { noremap = false } },
+
+  -- auto scroll and unfold the line when finding
+  { { "n", "v" },      "n",              "nzzzv" },
+  { { "n", "v" },      "N",              "Nzzzv" },
+
+  -- sweeter indent
+  { "v",               "<",              "<gv" },
+  { "v",               ">",              ">gv" },
+}
+
+for _, entry in ipairs(mappings) do
+  local modes, lhs, rhs, entry_opts = unpack(entry)
+  opts = vim.tbl_deep_extend("force", shared_opts, entry_opts or {})
+  vim.keymap.set(modes, lhs, rhs, opts)
+end
+
+-- invoked by nvim-cmp
+function LspKeyMappings()
+  return {
+    { "n",          "K",    ":lua vim.lsp.buf.hover()<cr>" },
+    { "n",          "gd",   ":lua vim.lsp.buf.definition()<cr>" },
+    { "n",          "gD",   ":lua vim.lsp.buf.declaration()<cr>" },
+    { "n",          "gi",   ":lua vim.lsp.buf.implementation()<cr>" },
+    { "n",          "go",   ":lua vim.lsp.buf.type_definition()<cr>" },
+    { "n",          "gr",   ":lua vim.lsp.buf.references()<cr>" },
+    { "n",          "gs",   ":lua vim.lsp.buf.signature_help()<cr>" },
+    { "n",          "<F2>", ":lua vim.lsp.buf.rename()<cr>" },
+    { { "n", "x" }, "<F3>", ":lua vim.lsp.buf.format({async = true})<cr>" },
+    { { "n", "x" }, "<F4>", ":lua vim.lsp.buf.code_action({async = true})<cr>" },
+  }
+end
