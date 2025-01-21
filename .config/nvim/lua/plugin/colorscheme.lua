@@ -12,7 +12,7 @@ return {
       bold = true,
     },
     highlight_groups = {
-      Visual = { fg = "base", bg = "muted", inherit = false },
+      Visual = { fg = "base", bg = "gold", inherit = false },
     },
   },
 }
