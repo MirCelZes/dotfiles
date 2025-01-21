@@ -8,6 +8,7 @@ return {
   {
     "williamboman/mason.nvim",
     build = ":MasonUpdate",
+    lazy = true,
     opts = {},
   },
   {
@@ -15,6 +16,7 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
     },
+    lazy = true,
     config = function()
       local mason_lspconfig = require("mason-lspconfig")
 
@@ -24,6 +26,8 @@ return {
       mason_lspconfig.setup({
         ensure_installed = {
           "lua_ls",
+          "gopls",
+          "rust_analyzer",
         },
         automatic_installation = {
           exclude = {},
@@ -36,7 +40,6 @@ return {
         function(server_name)
           require("lspconfig")[server_name].setup({})
         end,
-
         -- notice that all the handler below will overwrite the default one
         -- cuz setup() should onlu be invoked once
       })

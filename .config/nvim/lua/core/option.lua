@@ -1,5 +1,8 @@
 vim.g.have_nerd_font = true
 
+-- :Inspect bug in v0.10.3
+vim.hl = vim.highlight
+
 -- :help xxx (where xxx should be within "vim.opt.xxx")
 -- :help vim.opt
 -- :help option-list

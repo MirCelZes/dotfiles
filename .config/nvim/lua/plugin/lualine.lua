@@ -3,6 +3,6 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   lazy = false,
   opts = {
-    options = { theme = "horizon" },
+    options = { theme = "rose-pine" },
   },
 }
