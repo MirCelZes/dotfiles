@@ -57,7 +57,7 @@ opt.inccommand = "nosplit"
 opt.cursorline = true
 
 -- line will continue in next line if too long
-opt.wrap = true
+opt.wrap = false
 
 -- change line at a convenient position so that a single word will no be splitted
 opt.linebreak = true

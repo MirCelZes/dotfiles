@@ -22,23 +22,23 @@ local mappings = {
   { "n",               "<leader>wk",     ":topleft split | wincmd k<cr>",     { desc = "Split a window to above" } },
   { "n",               "<leader>wl",     ":rightbelow vsplit | wincmd l<cr>", { desc = "Split a window to right" } },
 
-  { { "n", "i", "v" }, "<M-w>h",         ":wincmd h<cr>",                     { desc = "Go to left window" } },
-  { { "n", "i", "v" }, "<M-w>j",         ":wincmd j<cr>",                     { desc = "Go to below window" } },
-  { { "n", "i", "v" }, "<M-w>k",         ":wincmd k<cr>",                     { desc = "Go to above window" } },
-  { { "n", "i", "v" }, "<M-w>l",         ":wincmd l<cr>",                     { desc = "Go to right window" } },
+  { "n",               "<M-w>h",         ":wincmd h<cr>",                     { desc = "Go to left window" } },
+  { "n",               "<M-w>j",         ":wincmd j<cr>",                     { desc = "Go to below window" } },
+  { "n",               "<M-w>k",         ":wincmd k<cr>",                     { desc = "Go to above window" } },
+  { "n",               "<M-w>l",         ":wincmd l<cr>",                     { desc = "Go to right window" } },
 
-  { { "n", "i", "v" }, "<S-w><Right>",   ":vertical resize +1<cr>",           { desc = "Increase window height" } },
-  { { "n", "i", "v" }, "<S-w><Down>",    ":resize -1<cr>",                    { desc = "Decrease window weight" } },
-  { { "n", "i", "v" }, "<S-w><Up>",      ":resize +1<cr>",                    { desc = "Increase window weight" } },
-  { { "n", "i", "v" }, "<S-w><Left>",    ":vertical resize -1<cr>",           { desc = "Decrease window weight" } },
+  { "n",               "<S-w><Right>",   ":vertical resize +1<cr>",           { desc = "Increase window height" } },
+  { "n",               "<S-w><Down>",    ":resize -1<cr>",                    { desc = "Decrease window weight" } },
+  { "n",               "<S-w><Up>",      ":resize +1<cr>",                    { desc = "Increase window weight" } },
+  { "n",               "<S-w><Left>",    ":vertical resize -1<cr>",           { desc = "Decrease window weight" } },
 
   { { "n", "i" },      "<M-j>",          "<esc>:move .+1<cr>==",              { desc = "Move current line down" } },
   { { "n", "i" },      "<M-k>",          "<esc>:move .-2<cr>==",              { desc = "Move current line up" } },
-  { "v",               "<M-j>",          ":'<,'>move '>+<cr>gv=gv",           { desc = "Move selected lines up" } },
-  { "v",               "<M-k>",          ":'<,'>move '<-2<cr>gv=gv",          { desc = "Move selected lines down" } },
+  { "x",               "<M-j>",          ":'<,'>move '>+<cr>gv=gv",           { desc = "Move selected lines up" } },
+  { "x",               "<M-k>",          ":'<,'>move '<-2<cr>gv=gv",          { desc = "Move selected lines down" } },
 
-  { { "n", "i", "v" }, "<M-w>[",         ":bprevious<cr>",                    { desc = "Go to previous buffer" } },
-  { { "n", "i", "v" }, "<M-w>]",         ":bnext<cr>",                        { desc = "Go to next buffer" } },
+  { "n",               "<M-w>[",         ":bprevious<cr>",                    { desc = "Go to previous buffer" } },
+  { "n",               "<M-w>]",         ":bnext<cr>",                        { desc = "Go to next buffer" } },
 
   -- tab
   { "n",               "<leader><tab>n", ":tabnew<cr>",                       { desc = "Create new tab" } },
@@ -48,19 +48,19 @@ local mappings = {
   { "n",               "<tab>]",         ":tabnext<cr>",                      { desc = "Go to next tab" } },
 
   -- diagnose
-  { { "n", "i", "v" }, "<M-[>",          vim.diagnostic.goto_prev,            { desc = "Go to previous diagnostic message" } },
-  { { "n", "i", "v" }, "<M-]>",          vim.diagnostic.goto_next,            { desc = "Go to next diagnostic message" } },
+  { { "n", "i", "x" }, "<M-[>",          vim.diagnostic.goto_prev,            { desc = "Go to previous diagnostic message" } },
+  { { "n", "i", "x" }, "<M-]>",          vim.diagnostic.goto_next,            { desc = "Go to next diagnostic message" } },
 
   -- clear highlights on search when pressing <esc>
   { "n",               "<esc>",          ":nohlsearch<cr>",                   { noremap = false } },
 
   -- auto scroll and unfold the line when finding
-  { { "n", "v" },      "n",              "nzzzv" },
-  { { "n", "v" },      "N",              "Nzzzv" },
+  { { "n", "x" },      "n",              "nzzzv" },
+  { { "n", "x" },      "N",              "Nzzzv" },
 
   -- sweeter indent
-  { "v",               "<",              "<gv" },
-  { "v",               ">",              ">gv" },
+  { "x",               "<",              "<gv" },
+  { "x",               ">",              ">gv" },
 }
 
 for _, entry in ipairs(mappings) do

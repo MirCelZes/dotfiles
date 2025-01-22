@@ -7,9 +7,11 @@ return {
     vim.cmd("colorscheme rose-pine")
   end,
   opts = {
+    variant = "main",
     styles = {
       italic = true,
       bold = true,
+      transparency = false,
     },
     highlight_groups = {
       Visual = { fg = "base", bg = "gold", inherit = false },
