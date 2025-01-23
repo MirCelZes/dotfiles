@@ -59,8 +59,12 @@ local mappings = {
   { { "n", "x" },      "N",              "Nzzzv" },
 
   -- sweeter indent
-  { "x",               "<",              "<gv" },
-  { "x",               ">",              ">gv" },
+  { "v",               "<",              "<gv" },
+  { "v",               ">",              ">gv" },
+
+  -- unmap
+  { { "n", "v" }, "s", "<nop>" },
+  { "n" , "\\", "<nop>" },
 }
 
 for _, entry in ipairs(mappings) do
@@ -69,18 +73,3 @@ for _, entry in ipairs(mappings) do
   vim.keymap.set(modes, lhs, rhs, opts)
 end
 
--- invoked by nvim-cmp
-function LspKeyMappings()
-  return {
-    { "n",          "K",    ":lua vim.lsp.buf.hover()<cr>" },
-    { "n",          "gd",   ":lua vim.lsp.buf.definition()<cr>" },
-    { "n",          "gD",   ":lua vim.lsp.buf.declaration()<cr>" },
-    { "n",          "gi",   ":lua vim.lsp.buf.implementation()<cr>" },
-    { "n",          "go",   ":lua vim.lsp.buf.type_definition()<cr>" },
-    { "n",          "gr",   ":lua vim.lsp.buf.references()<cr>" },
-    { "n",          "gs",   ":lua vim.lsp.buf.signature_help()<cr>" },
-    { "n",          "<F2>", ":lua vim.lsp.buf.rename()<cr>" },
-    { { "n", "x" }, "<F3>", ":lua vim.lsp.buf.format({async = true})<cr>" },
-    { { "n", "x" }, "<F4>", ":lua vim.lsp.buf.code_action({async = true})<cr>" },
-  }
-end

@@ -8,6 +8,8 @@ return {
 
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-path",
     },
     event = "InsertEnter",
     config = function()
@@ -31,11 +33,12 @@ return {
             require("luasnip").lsp_expand(args.body)
           end,
         },
-        sources = {
+        sources = cmp.config.sources({
           { name = "nvim_lsp" },
-          { name = "lua_snip" },
+          { name = "luasnip" },
+        }, {
           { name = "buffer" },
-        },
+        }),
         window = {
           documentation = {
             border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
@@ -73,6 +76,23 @@ return {
             end
           end, { "i", "s" }),
         })
+      })
+
+      cmp.setup.cmdline({ "/", "?" }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "buffer" }
+        })
+      })
+
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "path" }
+        }, {
+          { name = "cmdline" }
+        }),
+        matching = { disallow_symbol_nonprefix_matching = false }
       })
     end,
   },

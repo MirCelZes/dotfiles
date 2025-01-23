@@ -18,9 +18,21 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         desc = "Triggerd when lsp attaches to buffer",
         callback = function(event)
+          local mappings = {
+            { "n",          "K",    ":lua vim.lsp.buf.hover()<cr>" },
+            { "n",          "gd",   ":lua vim.lsp.buf.definition()<cr>" },
+            { "n",          "gD",   ":lua vim.lsp.buf.declaration()<cr>" },
+            { "n",          "gi",   ":lua vim.lsp.buf.implementation()<cr>" },
+            { "n",          "gt",   ":lua vim.lsp.buf.type_definition()<cr>" },
+            { "n",          "gr",   ":lua vim.lsp.buf.references()<cr>" },
+            { "n",          "gs",   ":lua vim.lsp.buf.signature_help()<cr>" },
+            { { "n", "x" }, "<F1>", ":lua vim.lsp.buf.format({async = true})<cr>" },
+            { "n",          "<F2>", ":lua vim.lsp.buf.rename()<cr>" },
+            { { "n", "x" }, "<F3>", ":lua vim.lsp.buf.code_action({async = true})<cr>" },
+          }
           local shared_opts = { buffer = event.buf }
 
-          for _, entry in ipairs(LspKeyMappings()) do
+          for _, entry in ipairs(mappings) do
             local modes, lhs, rhs, entry_opts = unpack(entry)
             opts = vim.tbl_deep_extend("force", shared_opts, entry_opts or { silent = true })
             vim.keymap.set(modes, lhs, rhs, opts)
