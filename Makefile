@@ -1,6 +1,9 @@
 DOTCONFIG:
 	stow -v -t ~/.config/ .config/
 
-local: DOTCONFIG
+clean:
+	stow -v -D -t ~/.config/ .config/
 
-.PHONY: DOTCONFIG local
+local: clean DOTCONFIG
+
+.PHONY: DOTCONFIG local clean
