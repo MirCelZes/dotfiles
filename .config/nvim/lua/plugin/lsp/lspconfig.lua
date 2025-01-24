@@ -50,6 +50,7 @@ return {
     event = { "BUfReadPost", "BufWritePost", "BufNewFile" },
     config = function()
       local mason_lspconfig = require("mason-lspconfig")
+      local signature = require("lsp_signature")
 
       -- lsp servers that should always be installed
       -- notice that the name of lsp servers are defined by nvim-lspconfigs
@@ -68,7 +69,13 @@ return {
           function(server_name)
             require("lspconfig")[server_name].setup({
               on_attach = function(client, bufnr)
-                require("lsp_signature").on_attach(signature_setup, bufnr)
+                signature.on_attach({
+                  hint_prefix = {
+                    above = "↙ ",
+                    current = "← ",
+                    below = "↖ ",
+                  },
+                }, bufnr)
               end,
             })
           end,
@@ -79,5 +86,6 @@ return {
   {
     "ray-x/lsp_signature.nvim",
     lazy = true,
+    enable = true,
   },
 }

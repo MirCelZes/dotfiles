@@ -65,6 +65,7 @@ local mappings = {
   -- unmap
   { { "n", "v" }, "s", "<nop>" },
   { "n" , "\\", "<nop>" },
+  { { "n", "i" } , "<F1>", "<nop>" },
 }
 
 for _, entry in ipairs(mappings) do

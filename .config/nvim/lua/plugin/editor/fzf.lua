@@ -9,6 +9,7 @@ return {
     { "<leader><space>:", ":FzfLua command_history<cr>",                           desc = "Fuzzy find command histories" },
     { "<leader><space>r", ":FzfLua resume<cr>",                                    desc = "Fuzzy find resume" },
     { "<leader><space>s", ":FzfLua lsp_workspace_symbols<cr>",                     desc = "Fuzzy find symbols in current workspace" },
+    { "<leader><space>a", ":FzfLua lsp_code_actions<cr>",                     desc = "Fuzzy find symbols in current workspace" },
   },
   config = function()
     local fzf = require("fzf-lua")
